@@ -15,10 +15,17 @@ const computerPaddle = document.querySelector('.computer-paddle');
 // Initial computer paddle y-position and y-velocity
 let computerPaddleYPosition = 0;
 let computerPaddleYVelocity = 1;
+// ==========Ball====================================
+const moveball = document.querySelector('.ball');
+let bPX = GAME_AREA_WIDTH/2;
+let bPY = GAME_AREA_HEIGHT/2;
+let bV =1;
+let dy = -1;
+let dx = 1;
 
 // Update the pong world
 function update() {
-
+// ====================paddles=======================
     // Update the computer paddle's position
     computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
 
@@ -27,6 +34,19 @@ function update() {
 
     // Apply the y-position 
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
+
+    // ================ball=========================
+    bPX++;
+    bPY++;
+    bP = bPY + bV;
+    if(bPY + dy > GAME_AREA_HEIGHT || bPY + dy < 0){
+        dy = -dy;
+    }
+    bPX = bPX % (GAME_AREA_HEIGHT - BALL_SIZE);
+    bPY = bPY% (GAME_AREA_HEIGHT - BALL_SIZE);
+
+    moveball.style.top = `${bPY}px`;
+    moveball.style.left = `${bPX}px`;
 }
 
 // Call the update() function everytime the browser is ready to re-render
