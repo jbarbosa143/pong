@@ -44,8 +44,6 @@ function update() {
     ballPositionX = ballPositionX + dx;
     if(ballPositionY > GAME_AREA_HEIGHT-BALL_SIZE || ballPositionY < 0 ){
         dy = ballPositionY * dy;
-    }else if(ballPositionY <0){
-        dy = ballPositionY * -dy;
     }
     if(ballPositionX > GAME_AREA_WIDTH-BALL_SIZE-BALL_SIZE || ballPositionX  < 0 ){
         dx = ballPositionX * dx;
