@@ -16,12 +16,13 @@ const computerPaddle = document.querySelector('.computer-paddle');
 let computerPaddleYPosition = 0;
 let computerPaddleYVelocity = 1;
 // ==========Ball====================================
-const moveball = document.querySelector('.ball');
-let bPX = GAME_AREA_WIDTH/2;
-let bPY = GAME_AREA_HEIGHT/2;
-let bV =1;
+const moveball = document.querySelector('#uwu');
+let ballPositionX = GAME_AREA_WIDTH/2;
+let ballPositionY = GAME_AREA_HEIGHT/2;
+let ballVelo = 1;
+let ballRadius = 20;
 let dy = -1;
-let dx = 1;
+let dx = -1;
 
 // Update the pong world
 function update() {
@@ -36,17 +37,21 @@ function update() {
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
 
     // ================ball=========================
-    bPX++;
-    bPY++;
-    bP = bPY + bV;
-    if(bPY + dy > GAME_AREA_HEIGHT || bPY + dy < 0){
-        dy = -dy;
+    
+    // ballPositionX++;
+    // ballPositionY++;
+    ballPositionY = ballPositionY + dy;
+    ballPositionX = ballPositionX + dx;
+    if(ballPositionY > GAME_AREA_HEIGHT-BALL_SIZE || ballPositionY < 0 ){
+        dy = ballPositionY * dy;
+    }else if(ballPositionY <0){
+        dy = ballPositionY * -dy;
     }
-    bPX = bPX % (GAME_AREA_HEIGHT - BALL_SIZE);
-    bPY = bPY% (GAME_AREA_HEIGHT - BALL_SIZE);
-
-    moveball.style.top = `${bPY}px`;
-    moveball.style.left = `${bPX}px`;
+    if(ballPositionX > GAME_AREA_WIDTH-BALL_SIZE-BALL_SIZE || ballPositionX  < 0 ){
+        dx = ballPositionX * dx;
+    }
+    moveball.style.top = `${ballPositionY}px`;
+    moveball.style.left = `${ballPositionX}px`;
 }
 
 // Call the update() function everytime the browser is ready to re-render
